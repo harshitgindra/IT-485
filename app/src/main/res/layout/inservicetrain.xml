@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/userroute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/getroutedetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fetch Data" />
+
+    <TextView
+        android:id="@+id/routename"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="hi" />
+
+    <TextView
+        android:id="@+id/laststop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text" />
+
+    <TextView
+        android:id="@+id/nextstop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text" />
+
+    <TableLayout
+        android:id="@+id/displayResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TableLayout>
+
+
+
+</LinearLayout>
