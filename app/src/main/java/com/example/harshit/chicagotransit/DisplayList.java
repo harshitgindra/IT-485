@@ -1,6 +1,7 @@
 package com.example.harshit.chicagotransit;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.widget.ArrayAdapter;
@@ -10,11 +11,30 @@ import android.widget.ArrayAdapter;
  */
 public class DisplayList extends ListActivity {
 
+    InServiceTrainsDataHandler fetchingList;
+
+
     String menuitem[] = {"Contacts","RssFeed","RefreshSwipe","Swipes","SettingUpWallpaper" ,"ImageLoaderURL","XmlEg", "Translate", "JsonReader", "Tabs", "HttpEg", "SharedPrefs", "Flipper", "SqlLite", "SqlView", "OurBrowser", "StartingPoint", "Camera", "Data", "TextPlay", "Email"};
+
+    public DisplayList() {
+        fetchingList = new InServiceTrainsDataHandler();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setListAdapter(new ArrayAdapter<String>(DisplayList.this, android.R.layout.simple_expandable_list_item_1, menuitem));
+        Intent i = getIntent();
+        String laststop[]=i.getStringArrayExtra("laststop");
+        String nextstop[]=i.getStringArrayExtra("nextstop");
+        String time[]=i.getStringArrayExtra("time");
+        String routenumber[]=i.getStringArrayExtra("routenumber");
+        String finalDisplay[] = new String[laststop.length];
+        for(int j=0;j<laststop.length;j++){
+            finalDisplay[j] = laststop[j] + " " + nextstop[j] + " " + time[j];
+        }
+
+
+        setListAdapter(new ArrayAdapter<String>(DisplayList.this, android.R.layout.simple_expandable_list_item_1, finalDisplay));
     }
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {

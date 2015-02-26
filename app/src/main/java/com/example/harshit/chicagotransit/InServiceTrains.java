@@ -31,17 +31,12 @@ public class InServiceTrains extends MainActivity implements View.OnClickListene
     EditText route;
     ListView lv;
     InServiceTrainsDataHandler calling;
-    private ArrayList<InServiceTrainAttributes> g = new ArrayList<>();
+    private ArrayList<String> display = new ArrayList<String>();
+    Button getDetails;
 
     public InServiceTrains() {
         this.calling = new InServiceTrainsDataHandler();
     }
-
-    private ArrayList<String> display = new ArrayList<String>();
-
-    //TableLayout displayResults;
-    Button getDetails;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inservicetrain);
@@ -66,8 +61,6 @@ public class InServiceTrains extends MainActivity implements View.OnClickListene
         nextstop = (TextView) findViewById(R.id.nextstop);
         routename = (TextView) findViewById(R.id.routename);
         route = (EditText) findViewById(R.id.userroute);
-        //lv = (ListView)findViewById(R.id.listView);
-        //displayResults = (TableLayout)findViewById(R.id.displayResults);
         getDetails = (Button) findViewById(R.id.getroutedetails);
         getDetails.setOnClickListener(this);
     }
@@ -80,7 +73,6 @@ public class InServiceTrains extends MainActivity implements View.OnClickListene
                 getRouteDetails.execute();
                 break;
         }
-
     }
 
     public ArrayList<String> getDisplay() {
@@ -91,9 +83,7 @@ public class InServiceTrains extends MainActivity implements View.OnClickListene
         this.display = display;
     }
 
-
     class GetRouteDetails extends AsyncTask<String, Void, Void> {
-
 
         @Override
         protected Void doInBackground(String... params) {
@@ -108,22 +98,8 @@ public class InServiceTrains extends MainActivity implements View.OnClickListene
                 XMLReader xmlReader = saxParser.getXMLReader();
                 xmlReader.setContentHandler(calling);
                 xmlReader.parse(new InputSource(website.openStream()));
-
-
-                String[] lastStop = new String[calling.getData().size()];
-                String[] nextStop = new String[calling.getData().size()];
-                String[] time = new String[calling.getData().size()];
-                String[] routenumber = new String[calling.getData().size()];
-                String total = "";
-                for (int i = 0; i < calling.getData().size(); i++) {
-                    lastStop[i] = calling.getData().get(i).getLastStop();
-                    nextStop[i] = calling.getData().get(i).getNextStop();
-                    time[i] = calling.getData().get(i).getTime();
-                    routenumber[i] = calling.getData().get(i).getRouteName();
-                }
-                String a  = calling.getData().get(0).toString();
+                String a = calling.getData().get(0).toString();
                 laststop.setText(a);
-
             } catch (Exception e) {
                 laststop.setText("error");
             }
@@ -132,8 +108,25 @@ public class InServiceTrains extends MainActivity implements View.OnClickListene
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            Intent jump = new Intent("com.example.harshit.chicagotransit.DISPLAYLIST");
-            startActivity(jump);
+            String[] lastStop = new String[calling.getData().size()];
+            String[] nextStop = new String[calling.getData().size()];
+            String[] time = new String[calling.getData().size()];
+            String[] routenumber = new String[calling.getData().size()];
+            String total = "";
+            for (int i = 0; i < calling.getData().size(); i++) {
+                lastStop[i] = calling.getData().get(i).getLastStop();
+                nextStop[i] = calling.getData().get(i).getNextStop();
+                String t = calling.getData().get(i).getTime().substring(9);
+                time[i] = t;
+                routenumber[i] = calling.getData().get(i).getRouteName();
+            }
+            Intent i = new Intent("com.example.harshit.chicagotransit.DISPLAYLIST");
+            i.putExtra("laststop", lastStop);
+            i.putExtra("nextstop",nextStop);
+            i.putExtra("time", time);
+            i.putExtra("routenumber", routenumber);
+            startActivity(i);
+
         }
     }
 
