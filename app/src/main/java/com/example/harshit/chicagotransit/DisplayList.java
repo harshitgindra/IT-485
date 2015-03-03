@@ -11,15 +11,6 @@ import android.widget.ArrayAdapter;
  */
 public class DisplayList extends ListActivity {
 
-    InServiceTrainsDataHandler fetchingList;
-
-
-    String menuitem[] = {"Contacts","RssFeed","RefreshSwipe","Swipes","SettingUpWallpaper" ,"ImageLoaderURL","XmlEg", "Translate", "JsonReader", "Tabs", "HttpEg", "SharedPrefs", "Flipper", "SqlLite", "SqlView", "OurBrowser", "StartingPoint", "Camera", "Data", "TextPlay", "Email"};
-
-    public DisplayList() {
-        fetchingList = new InServiceTrainsDataHandler();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +31,7 @@ public class DisplayList extends ListActivity {
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         super.onCreateOptionsMenu(menu);
         MenuInflater disp = getMenuInflater();
-        disp.inflate(R.menu.cool, menu);
+        disp.inflate(R.menu.trainlist, menu);
         return true;
     }
 

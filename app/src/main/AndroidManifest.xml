@@ -9,14 +9,33 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:name=".Spinner"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".DisplayList"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.example.harshit.chicagotransit.DISPLAYLIST" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".AllBusRoutes"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.example.harshit.chicagotransit.ALLBUSROUTES" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".InServiceTrains"
             android:label="@string/app_name">
@@ -26,15 +45,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DisplayList"
+            android:name=".Menu"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="com.example.harshit.chicagotransit.DISPLAYLIST" />
+                <action android:name="com.example.harshit.chicagotransit.MENU" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-
+        <activity
+            android:name=".ServiceTrains"
+            android:label="@string/app_name">
+            <intent-filter>
+            <action android:name="com.example.harshit.chicagotransit.SERVICETRAINS" />
+            <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DisplayBusList"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.example.harshit.chicagotransit.DISPLAYBUSLIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
