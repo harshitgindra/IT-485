@@ -9,31 +9,28 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 /**
- * Created by harshit on 3/3/2015.
+ * Created by harshit on 3/8/2015.
  */
-public class DisplayBusList extends ListActivity {
+public class GetRouteDirectionDisplay extends ListActivity {
 
-    String rootNo[];
-    String rootName[];
 
+    String[] directionList = new String [2];
+    String rootSelected = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent i = getIntent();
-        rootNo= i.getStringExtra("rootNo").split("z");
-        rootName= i.getStringExtra("rootName").split("1z");
-        String finalDisplay[] = new String[rootNo.length];
-        for(int j=0;j<rootNo.length;j++){
-            finalDisplay[j] = rootNo[j] + " " + rootName[j];
-        }
-        setListAdapter(new ArrayAdapter<String>(DisplayBusList.this, android.R.layout.simple_expandable_list_item_1, finalDisplay));
+        directionList[0]= i.getStringExtra("dir1");
+        directionList[1]=i.getStringExtra("dir2");
+        rootSelected = i.getStringExtra("root");
+        setListAdapter(new ArrayAdapter<String>(GetRouteDirectionDisplay.this, android.R.layout.simple_expandable_list_item_1, directionList));
     }
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         super.onCreateOptionsMenu(menu);
         MenuInflater disp = getMenuInflater();
-        disp.inflate(R.menu.busroute, menu);
+        disp.inflate(R.menu.busdirection, menu);
         return true;
     }
 
@@ -41,11 +38,10 @@ public class DisplayBusList extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
 
         super.onListItemClick(l, v, position, id);
-        String rtSelected = rootNo[position];
-        Intent i = new Intent("com.example.harshit.chicagotransit.GETROUTEDIRECTION");
-        i.putExtra("rootNoSelected", rtSelected);
+       Intent i = new Intent("com.example.harshit.chicagotransit.BUSSTOPLIST");
+        i.putExtra("rootSelected", rootSelected);
+        i.putExtra("direction", directionList[position]);
         startActivity(i);
     }
-
 
 }

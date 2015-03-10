@@ -3,7 +3,6 @@ package com.example.harshit.chicagotransit;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.Button;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -14,41 +13,41 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 /**
- * Created by harshit on 3/2/2015.
+ * Created by harshit on 3/4/2015.
  */
-public class AllBusRoutes extends MainActivity {
+public class GetRouteDirection extends MainActivity {
 
-    private static final String routeLink = "http://www.ctabustracker.com/bustime/api/v1/getroutes?key=RQkSsAPXCVt58mtjrqxAXpGXv";
-    AllBusRouteDataHandler busHandler;
-    Button tv1;
+    private final String directionLink = "http://www.ctabustracker.com/bustime/api/v1/getdirections?key=RQkSsAPXCVt58mtjrqxAXpGXv&rt=";
+    String rootSelected="";
+    private GetRouteDirectionDataHandler direction;
 
-    public AllBusRoutes() {
-        busHandler = new AllBusRouteDataHandler();
+    public GetRouteDirection(){
+        direction = new GetRouteDirectionDataHandler();
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FetchBusRoutes fetchBusRoutes = new FetchBusRoutes();
-        fetchBusRoutes.execute();
+        Intent i = getIntent();
+        rootSelected = i.getStringExtra("rootNoSelected");
+        FetchBusDirection fetchBusDirection = new FetchBusDirection();
+        fetchBusDirection.execute();
 
     }
 
-
-    class FetchBusRoutes extends AsyncTask<String, Void, Void> {
+    class FetchBusDirection extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... params) {
+            String routeLink = directionLink+rootSelected;
             StringBuilder url = new StringBuilder(routeLink);
-
             String finalurl = url.toString();
             try {
                 URL website = new URL(finalurl);
                 SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
                 SAXParser saxParser = saxParserFactory.newSAXParser();
                 XMLReader xmlReader = saxParser.getXMLReader();
-                xmlReader.setContentHandler(busHandler);
+                xmlReader.setContentHandler(direction);
                 xmlReader.parse(new InputSource(website.openStream()));
-                String a = busHandler.getData().get(0).getRootClr();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -57,17 +56,12 @@ public class AllBusRoutes extends MainActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            String a = "";
-            String b = "";
-            for (int i = 0; i < busHandler.getData().size(); i++) {
-
-                a += busHandler.getData().get(i).getRootNo() + "z";
-                b += busHandler.getData().get(i).getRootName() + "1z";
-            }
-            Intent i = new Intent("com.example.harshit.chicagotransit.DISPLAYBUSLIST");
-            i.putExtra("rootNo", a);
-            i.putExtra("rootName", b);
+            Intent i = new Intent("com.example.harshit.chicagotransit.GETROUTEDIRECTIONDISPLAY");
+            i.putExtra("dir1", direction.getAttribute().dir1);
+            i.putExtra("dir2", direction.getAttribute().dir2);
+            i.putExtra("root", rootSelected );
             startActivity(i);
+
         }
     }
 }
