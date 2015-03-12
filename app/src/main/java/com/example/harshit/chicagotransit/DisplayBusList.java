@@ -11,7 +11,7 @@ import android.widget.ListView;
 /**
  * Created by harshit on 3/3/2015.
  */
-public class DisplayBusList extends ListActivity {
+public class DisplayBusList extends MainActivity {
 
     String rootNo[];
     String rootName[];
@@ -26,21 +26,22 @@ public class DisplayBusList extends ListActivity {
         for(int j=0;j<rootNo.length;j++){
             finalDisplay[j] = rootNo[j] + " " + rootName[j];
         }
-        setListAdapter(new ArrayAdapter<String>(DisplayBusList.this, android.R.layout.simple_expandable_list_item_1, finalDisplay));
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(DisplayBusList.this, android.R.layout.simple_dropdown_item_1line, finalDisplay);
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {
         super.onCreateOptionsMenu(menu);
         MenuInflater disp = getMenuInflater();
-        disp.inflate(R.menu.busroute, menu);
+        //disp.inflate(R.menu.busroute, menu);
         return true;
     }
 
-    @Override
+  //  @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
 
-        super.onListItemClick(l, v, position, id);
+        //super.onListItemClick(l, v, position, id);
         String rtSelected = rootNo[position];
         Intent i = new Intent("com.example.harshit.chicagotransit.GETROUTEDIRECTION");
         i.putExtra("rootNoSelected", rtSelected);

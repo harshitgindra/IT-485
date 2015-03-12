@@ -3,12 +3,19 @@ package com.example.harshit.chicagotransit;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
 import java.net.URL;
+import java.util.Arrays;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -21,6 +28,9 @@ public class AllBusRoutes extends MainActivity {
     private static final String routeLink = "http://www.ctabustracker.com/bustime/api/v1/getroutes?key=RQkSsAPXCVt58mtjrqxAXpGXv";
     AllBusRouteDataHandler busHandler;
     Button tv1;
+    ListView busroutelv;
+    AutoCompleteTextView acbusroutes;
+    String finalArray[];
 
     public AllBusRoutes() {
         busHandler = new AllBusRouteDataHandler();
@@ -29,9 +39,36 @@ public class AllBusRoutes extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.completebusroutes);
+        initialize();
         FetchBusRoutes fetchBusRoutes = new FetchBusRoutes();
         fetchBusRoutes.execute();
+    }
 
+    private void initialize() {
+        busroutelv = (ListView) findViewById(R.id.busroutelistview);
+        acbusroutes = (AutoCompleteTextView) findViewById(R.id.acbusroutes);
+//        busroutelv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                String msg =acbusroutes.getText().toString();
+//               // Toast.makeText(AllBusRoutes.this, msg, Toast.LENGTH_LONG).show();
+//                int pos = Arrays.asList(finalArray).indexOf(msg);
+//                Intent i = new Intent("com.example.harshit.chicagotransit.GETROUTEDIRECTION");
+//                i.putExtra("rootNoSelected", busHandler.getData().get(pos).getRootNo());
+//                startActivity(i);
+//            }
+//        });
+    }
+
+    public void GetBusDirection(View view) {
+        String msg =acbusroutes.getText().toString();
+        // Toast.makeText(AllBusRoutes.this, msg, Toast.LENGTH_LONG).show();
+        int pos = Arrays.asList(finalArray).indexOf(msg);
+        Intent i = new Intent("com.example.harshit.chicagotransit.GETROUTEDIRECTION");
+        i.putExtra("rootNoSelected", busHandler.getData().get(pos).getRootNo());
+        startActivity(i);
     }
 
 
@@ -57,17 +94,25 @@ public class AllBusRoutes extends MainActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            String a = "";
-            String b = "";
-            for (int i = 0; i < busHandler.getData().size(); i++) {
-
-                a += busHandler.getData().get(i).getRootNo() + "z";
-                b += busHandler.getData().get(i).getRootName() + "1z";
+//            String rootNo = "";
+//            String rootName = "";
+//            for (int i = 0; i < busHandler.getData().size(); i++) {
+//
+//                rootNo += busHandler.getData().get(i).getRootNo() + "z";
+//                rootName += busHandler.getData().get(i).getRootName() + "1z";
+//            }
+//            Intent i = new Intent("com.example.harshit.chicagotransit.DISPLAYBUSLIST");
+//            i.putExtra("rootNo", rootNo);
+//            i.putExtra("rootName", rootName);
+//            startActivity(i);
+            finalArray = new String[busHandler.getData().size()];
+            for (int i = 0; i < busHandler.getData().size(); i++){
+                finalArray[i] = busHandler.getData().get(i).getRootName();
             }
-            Intent i = new Intent("com.example.harshit.chicagotransit.DISPLAYBUSLIST");
-            i.putExtra("rootNo", a);
-            i.putExtra("rootName", b);
-            startActivity(i);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(AllBusRoutes.this, android.R.layout.simple_dropdown_item_1line, finalArray );
+            acbusroutes.setThreshold(1);
+            acbusroutes.setAdapter(adapter);
+            //busroutelv.setAdapter(adapter);
         }
     }
 }

@@ -3,6 +3,8 @@ package com.example.harshit.chicagotransit;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -21,6 +23,7 @@ public class BusStopList extends MainActivity {
     String direction = "";
     private static final String apiLink = "http://www.ctabustracker.com/bustime/api/v1/getstops?key=RQkSsAPXCVt58mtjrqxAXpGXv&";
     BusStopListDataHandler busStopListDataHandler;
+    ListView busstoplist;
 
     public BusStopList() {
         busStopListDataHandler = new BusStopListDataHandler();
@@ -29,12 +32,18 @@ public class BusStopList extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.busstoplist);
+        initialize();
         Intent i = getIntent();
         root = i.getStringExtra("rootSelected");
         direction = i.getStringExtra("direction");
         getStops fetch = new getStops();
         fetch.execute();
 
+    }
+
+    private void initialize() {
+        busstoplist = (ListView)findViewById(R.id.busstoplistlv);
     }
 
     class getStops extends AsyncTask {
@@ -54,8 +63,6 @@ public class BusStopList extends MainActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
             return null;
         }
 
@@ -68,11 +75,13 @@ public class BusStopList extends MainActivity {
                 stopID[i] = busStopListDataHandler.getStopList().get(i).getStopID();
                 stopName[i] = busStopListDataHandler.getStopList().get(i).getStopName();
             }
-            Intent i = new Intent("com.example.harshit.chicagotransit.BUSSTOPLISTDISPLAY");
-            i.putExtra("stopid", stopID);
-            i.putExtra("stopname", stopName);
-            //i.putExtra("root", rootSelected );
-            startActivity(i);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(BusStopList.this, android.R.layout.simple_dropdown_item_1line, stopName);
+            busstoplist.setAdapter(adapter);
+//            Intent i = new Intent("com.example.harshit.chicagotransit.BUSSTOPLISTDISPLAY");
+//            i.putExtra("stopid", stopID);
+//            i.putExtra("stopname", stopName);
+//            //i.putExtra("root", rootSelected );
+//            startActivity(i);
         }
     }
 }
