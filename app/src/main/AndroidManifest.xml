@@ -101,6 +101,22 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".TrainArrivalsAtStop"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.example.harshit.chicagotransit.TRAINARRIVALSATSTOP" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".PredictionTrainStations"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.example.harshit.chicagotransit.PREDICTIONTRAINSTATIONS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

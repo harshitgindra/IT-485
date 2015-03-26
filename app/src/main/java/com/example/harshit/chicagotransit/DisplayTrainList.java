@@ -2,6 +2,8 @@ package com.example.harshit.chicagotransit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -11,6 +13,7 @@ import android.widget.ListView;
 public class DisplayTrainList extends MainActivity {
 
     ListView trainsonselectedroute;
+    String stopid[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,15 +21,25 @@ public class DisplayTrainList extends MainActivity {
         setContentView(R.layout.disptrainlistonroute);
         initialize();
         Intent i = getIntent();
-        String[]laststop = i.getStringArrayExtra("laststop");
-        String[]nextstop =  i.getStringArrayExtra("nextstop");
-        String[]time=i.getStringArrayExtra("time");
-        String[]routenumber=i.getStringArrayExtra("routenumber");
+        String[] laststop = i.getStringArrayExtra("laststop");
+        String[] nextstop = i.getStringArrayExtra("nextstop");
+        String[] time = i.getStringArrayExtra("time");
+        String[] routenumber = i.getStringArrayExtra("routenumber");
+        stopid = i.getStringArrayExtra("stopid");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(DisplayTrainList.this, android.R.layout.simple_dropdown_item_1line, laststop);
         trainsonselectedroute.setAdapter(adapter);
     }
 
     private void initialize() {
-        trainsonselectedroute = (ListView)findViewById(R.id.trainsonselectedroute);
+        trainsonselectedroute = (ListView) findViewById(R.id.trainsonselectedroute);
+        trainsonselectedroute.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String stop = stopid[position];
+                Intent i = new Intent("com.example.harshit.chicagotransit.TRAINARRIVALSATSTOP");
+                i.putExtra("stopid", stop);
+                startActivity(i);
+            }
+        });
     }
 }

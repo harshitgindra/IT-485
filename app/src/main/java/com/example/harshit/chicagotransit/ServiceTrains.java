@@ -3,6 +3,7 @@ package com.example.harshit.chicagotransit;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -101,6 +102,7 @@ public class ServiceTrains extends MainActivity {
             String[] nextStop = new String[calling.getData().size()];
             String[] time = new String[calling.getData().size()];
             String[] routenumber = new String[calling.getData().size()];
+            String[] stopid = new String[calling.getData().size()];
             String total = "";
             for (int i = 0; i < calling.getData().size(); i++) {
                 lastStop[i] = calling.getData().get(i).getLastStop();
@@ -108,12 +110,14 @@ public class ServiceTrains extends MainActivity {
                 String t = calling.getData().get(i).getTime().substring(9);
                 time[i] = t;
                 routenumber[i] = calling.getData().get(i).getRouteName();
+                stopid[i] = calling.getData().get(i).getStpid();
             }
             Intent i = new Intent("com.example.harshit.chicagotransit.DISPLAYTRAINLIST");
             i.putExtra("laststop", lastStop);
             i.putExtra("nextstop", nextStop);
             i.putExtra("time", time);
             i.putExtra("routenumber", routenumber);
+            i.putExtra("stopid", stopid);
             startActivity(i);
 
         }

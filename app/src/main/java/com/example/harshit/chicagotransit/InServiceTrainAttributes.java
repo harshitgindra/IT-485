@@ -8,6 +8,7 @@ public class InServiceTrainAttributes {
     private String lastStop;
     private String nextStop;
     private String time;
+    private String stpid;
     String temp = "";
 
     public String geResults() {
@@ -47,6 +48,13 @@ public class InServiceTrainAttributes {
     }
 
 
+    public String getStpid() {
+        return stpid;
+    }
+
+    public void setStpid(String stpid) {
+        this.stpid = stpid;
+    }
 }
 
 

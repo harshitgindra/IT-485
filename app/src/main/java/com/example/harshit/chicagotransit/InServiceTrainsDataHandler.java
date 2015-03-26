@@ -44,7 +44,11 @@ public class InServiceTrainsDataHandler extends DefaultHandler {
             getAttribute().setNextStop(elementValue);
         } else if (element.equalsIgnoreCase("arrT")) {
             attribute.setTime(elementValue);
-        } else if (element.equalsIgnoreCase("heading")) {
+        }
+        else if (element.equalsIgnoreCase("nextStpId")) {
+            attribute.setStpid(elementValue);
+        }
+        else if (element.equalsIgnoreCase("heading")) {
             data.add(getAttribute());
             attribute = new InServiceTrainAttributes();
         }
