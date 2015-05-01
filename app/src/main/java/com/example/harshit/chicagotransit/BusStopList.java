@@ -18,7 +18,7 @@ import javax.xml.parsers.SAXParserFactory;
  * Created by harshit on 3/8/2015.
  */
 public class BusStopList extends MainActivity {
-
+    //Redirected from GetRouteDirection
     String root = "";
     String direction = "";
     private static final String apiLink = "http://www.ctabustracker.com/bustime/api/v1/getstops?key=RQkSsAPXCVt58mtjrqxAXpGXv&";
@@ -43,7 +43,7 @@ public class BusStopList extends MainActivity {
     }
 
     private void initialize() {
-        busstoplist = (ListView)findViewById(R.id.busstoplistlv);
+        busstoplist = (ListView) findViewById(R.id.busstoplistlv);
     }
 
     class getStops extends AsyncTask {
@@ -77,11 +77,6 @@ public class BusStopList extends MainActivity {
             }
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(BusStopList.this, android.R.layout.simple_dropdown_item_1line, stopName);
             busstoplist.setAdapter(adapter);
-//            Intent i = new Intent("com.example.harshit.chicagotransit.BUSSTOPLISTDISPLAY");
-//            i.putExtra("stopid", stopID);
-//            i.putExtra("stopname", stopName);
-//            //i.putExtra("root", rootSelected );
-//            startActivity(i);
         }
     }
 }

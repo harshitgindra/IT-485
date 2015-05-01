@@ -48,18 +48,6 @@ public class AllBusRoutes extends MainActivity {
     private void initialize() {
         busroutelv = (ListView) findViewById(R.id.busroutelistview);
         acbusroutes = (AutoCompleteTextView) findViewById(R.id.acbusroutes);
-//        busroutelv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                String msg =acbusroutes.getText().toString();
-//               // Toast.makeText(AllBusRoutes.this, msg, Toast.LENGTH_LONG).show();
-//                int pos = Arrays.asList(finalArray).indexOf(msg);
-//                Intent i = new Intent("com.example.harshit.chicagotransit.GETROUTEDIRECTION");
-//                i.putExtra("rootNoSelected", busHandler.getData().get(pos).getRootNo());
-//                startActivity(i);
-//            }
-//        });
     }
 
     public void GetBusDirection(View view) {
@@ -94,17 +82,6 @@ public class AllBusRoutes extends MainActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-//            String rootNo = "";
-//            String rootName = "";
-//            for (int i = 0; i < busHandler.getData().size(); i++) {
-//
-//                rootNo += busHandler.getData().get(i).getRootNo() + "z";
-//                rootName += busHandler.getData().get(i).getRootName() + "1z";
-//            }
-//            Intent i = new Intent("com.example.harshit.chicagotransit.DISPLAYBUSLIST");
-//            i.putExtra("rootNo", rootNo);
-//            i.putExtra("rootName", rootName);
-//            startActivity(i);
             finalArray = new String[busHandler.getData().size()];
             for (int i = 0; i < busHandler.getData().size(); i++){
                 finalArray[i] = busHandler.getData().get(i).getRootName();
@@ -112,7 +89,6 @@ public class AllBusRoutes extends MainActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(AllBusRoutes.this, android.R.layout.simple_dropdown_item_1line, finalArray );
             acbusroutes.setThreshold(1);
             acbusroutes.setAdapter(adapter);
-            //busroutelv.setAdapter(adapter);
         }
     }
 }
