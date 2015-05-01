@@ -26,7 +26,11 @@ public class DisplayTrainList extends MainActivity {
         String[] time = i.getStringArrayExtra("time");
         String[] routenumber = i.getStringArrayExtra("routenumber");
         stopid = i.getStringArrayExtra("stopid");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(DisplayTrainList.this, android.R.layout.simple_dropdown_item_1line, laststop);
+        String[] finalDisplay = new String[laststop.length];
+        for (int j = 0; j < laststop.length; j++) {
+            finalDisplay[j] = nextstop[j] + "(" + laststop[j] + ")";
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(DisplayTrainList.this, android.R.layout.simple_dropdown_item_1line, finalDisplay);
         trainsonselectedroute.setAdapter(adapter);
     }
 

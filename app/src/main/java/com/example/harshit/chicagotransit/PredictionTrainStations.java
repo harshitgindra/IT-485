@@ -78,18 +78,8 @@ public class PredictionTrainStations extends MainActivity {
                 time[i] = calling.getData().get(i).getArrivalTime().substring(9);
                 finaDisplay[i] = stopName[i] + " -- " + time[i];
             }
-
-
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(PredictionTrainStations.this, android.R.layout.simple_dropdown_item_1line, finaDisplay);
             lvpredictiontrainStops.setAdapter(adapter);
-
-//            Intent i = new Intent("com.example.harshit.chicagotransit.DISPLAYTRAINLIST");
-//            i.putExtra("laststop", lastStop);
-//            i.putExtra("nextstop", nextStop);
-//            i.putExtra("time", time);
-//            i.putExtra("routenumber", routenumber);
-//            i.putExtra("stopid", stopid);
-//            startActivity(i);
 
         }
     }

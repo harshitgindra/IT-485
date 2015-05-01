@@ -73,6 +73,7 @@ ListView lvtrainsstop;
             String[] predictionTime = new String[calling.getData().size()];
             String[] destinationSt = new String[calling.getData().size()];
             String[] destStnName = new String[calling.getData().size()];
+            String displayResult[] = new String[destStnName.length];
             String total = "";
             for (int i = 0; i < calling.getData().size(); i++) {
                 stopName[i] = calling.getData().get(i).getStopName();
@@ -80,8 +81,9 @@ ListView lvtrainsstop;
                 predictionTime[i] = calling.getData().get(i).getPredictionTime().substring(9);
                 destinationSt[i] = calling.getData().get(i).getDestinationSt();
                 destStnName[i] = calling.getData().get(i).getDestStnName();
+                displayResult[i] = destStnName[i] +"-"+ predictionTime[i];
             }
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(TrainArrivalsAtStop.this, android.R.layout.simple_dropdown_item_1line, runnumber);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(TrainArrivalsAtStop.this, android.R.layout.simple_dropdown_item_1line, displayResult);
             lvtrainsstop.setAdapter(adapter);
 
             lvtrainsstop.setOnItemClickListener(new AdapterView.OnItemClickListener() {
