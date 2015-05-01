@@ -14,13 +14,12 @@ import android.widget.ListView;
 public class Menu extends ListActivity {
 
 
-    String menuitem[] = {"Bus Service", "Train Service"};
+    String menuitem[] = {"AllBusRoutes","Spinner", "ServiceTrains"};
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        String [] transitClass = {"AllBusRoutes", "ServiceTrains"};
-        String classSelected = transitClass[position];
+        String classSelected = menuitem[position];
         try {
             Class classname = Class.forName("com.example.harshit.chicagotransit." + classSelected);
             Intent itemList = new Intent(Menu.this, classname);

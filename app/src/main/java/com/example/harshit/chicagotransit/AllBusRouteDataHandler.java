@@ -41,7 +41,7 @@ public class AllBusRouteDataHandler extends DefaultHandler {
         } else if (element.equalsIgnoreCase("rtclr")) {
             getAttribute().setRootClr(elementValue);
             data.add(getAttribute());
-            attribute = new AllBusRouteDataAttributes();
+            attribute=new AllBusRouteDataAttributes();
         }
     }
 

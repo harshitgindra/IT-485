@@ -54,6 +54,14 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".DisplayBusList"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.example.harshit.chicagotransit.DISPLAYBUSLIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".GetRouteDirection"
             android:label="@string/app_name">
             <intent-filter>
@@ -62,10 +70,26 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".GetRouteDirectionDisplay"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.example.harshit.chicagotransit.GETROUTEDIRECTIONDISPLAY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".BusStopList"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="com.example.harshit.chicagotransit.BUSSTOPLIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".BusStopListDisplay"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.example.harshit.chicagotransit.BUSSTOPLISTDISPLAY" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

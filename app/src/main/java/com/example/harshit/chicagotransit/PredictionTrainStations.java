@@ -18,7 +18,7 @@ import javax.xml.parsers.SAXParserFactory;
  * Created by harshit on 3/26/2015.
  */
 public class PredictionTrainStations extends MainActivity {
-//Redirection from TrainArrivalsAtStop
+
 
     String runnumber = "";
     final static String apiLink = "http://lapi.transitchicago.com/api/1.0/ttfollow.aspx?key=60e684efe710400eafb7ed491201d370&runnumber=";
@@ -78,8 +78,19 @@ public class PredictionTrainStations extends MainActivity {
                 time[i] = calling.getData().get(i).getArrivalTime().substring(9);
                 finaDisplay[i] = stopName[i] + " -- " + time[i];
             }
+
+
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(PredictionTrainStations.this, android.R.layout.simple_dropdown_item_1line, finaDisplay);
             lvpredictiontrainStops.setAdapter(adapter);
+
+//            Intent i = new Intent("com.example.harshit.chicagotransit.DISPLAYTRAINLIST");
+//            i.putExtra("laststop", lastStop);
+//            i.putExtra("nextstop", nextStop);
+//            i.putExtra("time", time);
+//            i.putExtra("routenumber", routenumber);
+//            i.putExtra("stopid", stopid);
+//            startActivity(i);
+
         }
     }
 

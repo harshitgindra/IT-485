@@ -21,7 +21,7 @@ import javax.xml.parsers.SAXParserFactory;
  * Created by harshit on 3/4/2015.
  */
 public class GetRouteDirection extends MainActivity {
-//redirected from AllBusRoutes
+
     private final String directionLink = "http://www.ctabustracker.com/bustime/api/v1/getdirections?key=RQkSsAPXCVt58mtjrqxAXpGXv&rt=";
     String rootSelected = "";
     private GetRouteDirectionDataHandler direction;
@@ -81,8 +81,15 @@ public class GetRouteDirection extends MainActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             String[] finalDisplay = {direction.getAttribute().dir1, direction.getAttribute().dir2};
+
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(GetRouteDirection.this, android.R.layout.simple_dropdown_item_1line, finalDisplay);
             busroutedirection.setAdapter(adapter);
+//            Intent i = new Intent("com.example.harshit.chicagotransit.GETROUTEDIRECTIONDISPLAY");
+//            i.putExtra("dir1", direction.getAttribute().dir1);
+//            i.putExtra("dir2", direction.getAttribute().dir2);
+//            i.putExtra("root", rootSelected );
+//            startActivity(i);
+
         }
     }
 }

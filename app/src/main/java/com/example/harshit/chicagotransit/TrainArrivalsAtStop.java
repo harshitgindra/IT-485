@@ -20,12 +20,11 @@ import javax.xml.parsers.SAXParserFactory;
  * Created by harshit on 3/26/2015.
  */
 public class TrainArrivalsAtStop extends MainActivity {
-    //Redirection from DisplayTrainList on selecting a train
+
     String stopid = "";
     private final String apiLink = "http://lapi.transitchicago.com/api/1.0/ttarrivals.aspx?key=60e684efe710400eafb7ed491201d370&stpid=";
     TrainsArrivalDataHandler calling;
-    ListView lvtrainsstop;
-
+ListView lvtrainsstop;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,13 +36,13 @@ public class TrainArrivalsAtStop extends MainActivity {
         getRouteDetails.execute();
     }
 
-    public TrainArrivalsAtStop() {
+    public TrainArrivalsAtStop(){
         this.calling = new TrainsArrivalDataHandler();
     }
 
 
     private void initialize() {
-        lvtrainsstop = (ListView) findViewById(R.id.lvtrainsstop);
+        lvtrainsstop = (ListView)findViewById(R.id.lvtrainsstop);
     }
 
     class GetTrainsSchedule extends AsyncTask<String, Void, Void> {
@@ -94,6 +93,13 @@ public class TrainArrivalsAtStop extends MainActivity {
                     startActivity(i);
                 }
             });
+//            Intent i = new Intent("com.example.harshit.chicagotransit.PREDICTIONTRAINSTATIONS");
+//            i.putExtra("laststop", stopName);
+//            i.putExtra("nextstop", runnumber);
+//            i.putExtra("time", predictionTime);
+//            i.putExtra("runnumber", destinationSt);
+//            i.putExtra("stopid", destStnName);
+//            startActivity(i);
 
         }
     }

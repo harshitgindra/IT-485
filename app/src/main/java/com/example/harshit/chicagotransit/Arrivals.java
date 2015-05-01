@@ -35,11 +35,20 @@ public class Arrivals extends MainActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inservicetrain);
+        initilize();
+
+
+    }
+
+    private void initilize() {
+
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
 
+        }
     }
 
 
